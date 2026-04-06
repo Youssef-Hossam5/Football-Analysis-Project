@@ -229,7 +229,7 @@ class CameraMovementEstimator:
             cv2.rectangle(overlay, (0, 0), (500, 100), (255, 255, 255), -1)  # Solid white rectangle
             alpha = 0.6  # 60% overlay, 40% original frame showing through
             cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)
-
+            del overlay
             # --- Write X and Y movement values as text ---
             x_movement, y_movement = camera_movement_per_frame[frame_num]
 
@@ -253,5 +253,6 @@ class CameraMovementEstimator:
             )
 
             output_frames.append(frame)
+            frames[frame_num] = None
 
         return output_frames

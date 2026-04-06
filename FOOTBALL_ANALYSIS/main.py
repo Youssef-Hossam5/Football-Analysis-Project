@@ -19,7 +19,8 @@ def main():
     # Uses YOLO for detection and ByteTrack for consistent IDs across frames.
     # read_from_stub=True loads cached results to skip reprocessing.
     # -----------------------------------------------------------------------
-    tracker = Tracker('models/yolov5xu.pt')
+    tracker = Tracker('models/best.pt')
+    print(tracker.model.names)
     tracks = tracker.get_object_tracks(
         video_frames,
         read_from_stub=True,
@@ -64,7 +65,7 @@ def main():
     # cumulative distance in meters for each player across the video.
     # -----------------------------------------------------------------------
     speed_and_distance_estimator = SpeedAndDistance_Estimator()
-    speed_and_distance_estimator.add_speed_and_distance_to_tracks(tracks)
+    speed_and_distance_estimator.add_speed_distance_to_tracks(tracks)
 
     # -----------------------------------------------------------------------
     # 7. ASSIGN PLAYERS TO TEAMS
